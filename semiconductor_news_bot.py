@@ -91,7 +91,11 @@ Create a concise daily digest for a Telegram message. Format it like this:
         }
     )
     data = response.json()
+    if "content" in data:
     return data["content"][0]["text"]
+else:
+    print("Anthropic API Error:", data)
+    return "❌ Claude API failed. Check API key or quota."
 
 
 def send_telegram_message(text):
