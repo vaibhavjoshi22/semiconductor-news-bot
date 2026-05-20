@@ -1,0 +1,30 @@
+name: Daily Semiconductor News Bot
+
+on:
+  schedule:
+    # Runs every day at 9:00 AM India time (3:30 AM UTC)
+    - cron: '30 3 * * *'
+  workflow_dispatch:  # also lets you run it manually anytime
+
+jobs:
+  send-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests feedparser
+
+      - name: Run news bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python semiconductor_news_bot.py
