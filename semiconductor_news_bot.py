@@ -85,7 +85,7 @@ Create a concise daily digest for a Telegram message. Format it like this:
             "content-type": "application/json"
         },
         json={
-            "model": "claude-haiku-4-5-20251001",  # cheapest model — perfect for summaries
+            "model": ""model": "claude-3-haiku-20240307"",  # cheapest model — perfect for summaries
             "max_tokens": 1000,
             "messages": [{"role": "user", "content": prompt}]
         }
